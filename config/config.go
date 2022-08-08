@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 
 	"github.com/go-angle/angle/di"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 const (
@@ -24,6 +24,16 @@ type Config struct {
 	Name    string `yaml:"name"`
 	Version string `yaml:"version"`
 	Stage   string `yaml:"stage"`
+
+	app interface{} `yaml:"app"`
+}
+
+func (c *Config) ParseApp(out interface{}) error {
+	byts, err := yaml.Marshal(c.app)
+	if err != nil {
+		return err
+	}
+	return yaml.Unmarshal(byts, out)
 }
 
 // Option that provide by applications

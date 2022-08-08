@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	go.uber.org/fx v1.17.1
-	gopkg.in/yaml.v2 v2.2.2
+	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
 )
 
 require (
