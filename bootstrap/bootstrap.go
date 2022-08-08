@@ -31,7 +31,7 @@ func GetConfigPath() string {
 // Start the angle.
 func Start(timeout ...time.Duration) (context.CancelFunc, error) {
 	gOptions := di.Options()
-	options := make([]fx.Option, len(gOptions)+1, 0)
+	options := make([]fx.Option, 0, len(gOptions)+1)
 	options = append(options, configOptionProvider())
 	for _, o := range gOptions {
 		options = append(options, o)
