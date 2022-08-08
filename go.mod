@@ -2,7 +2,10 @@ module github.com/go-angle/angle
 
 go 1.19
 
-require go.uber.org/fx v1.17.1
+require (
+	go.uber.org/fx v1.17.1
+	gopkg.in/yaml.v2 v2.2.2
+)
 
 require (
 	go.uber.org/atomic v1.6.0 // indirect
