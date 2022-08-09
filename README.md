@@ -15,7 +15,7 @@
 Install angle:
 
 ``` shell
-go get https://github.com/go-angle/angle
+go get github.com/go-angle/angle
 ```
 
 Create `config.yml`:
