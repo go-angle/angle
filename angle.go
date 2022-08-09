@@ -1,4 +1,4 @@
-// Package angle Go framework with battery included.
+// Package angle is a Go framework with battery included.
 package angle
 
 import (
