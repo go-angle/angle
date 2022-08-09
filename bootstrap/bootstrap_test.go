@@ -7,7 +7,7 @@ import (
 
 func TestBootstrap(t *testing.T) {
 	SetConfigPath("config.yml")
-	_, err := Start(time.Second)
+	_, _, err := Start()
 	if err != nil {
 		t.Fatalf("start failed %s", err)
 	}

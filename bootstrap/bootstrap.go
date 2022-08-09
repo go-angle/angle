@@ -28,17 +28,24 @@ func GetConfigPath() string {
 	return "conf/config.yml"
 }
 
+// Err returns error of fx.App
+func Err() error {
+	return app.Err()
+}
+
 // Start the angle.
-func Start(timeout ...time.Duration) (context.CancelFunc, error) {
+func Start(invokes ...interface{}) (<-chan os.Signal, context.CancelFunc, error) {
 	gOptions := di.Options()
-	options := make([]fx.Option, 0, len(gOptions)+1)
+	options := make([]fx.Option, 0, len(gOptions)+len(invokes)+1)
 	options = append(options, configOptionProvider())
 	for _, o := range gOptions {
 		options = append(options, o)
 	}
+	options = append(options, fx.Invoke(invokes...))
 	app = fx.New(options...)
-	ctx, cancel := getCtx(timeout...)
-	return cancel, app.Start(ctx)
+	ctx, cancel := getCtx()
+	err := app.Start(ctx)
+	return app.Done(), cancel, err
 }
 
 func configOptionProvider() fx.Option {

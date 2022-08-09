@@ -28,6 +28,12 @@ type Config struct {
 	app interface{} `yaml:"app"`
 }
 
+// IsDevelopment returns true if current stage is development.
+func (c *Config) IsDevelopment() bool {
+	return c.Stage == StageDev
+}
+
+// ParseApp configuration to out.
 func (c *Config) ParseApp(out interface{}) error {
 	byts, err := yaml.Marshal(c.app)
 	if err != nil {
