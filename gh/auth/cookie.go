@@ -11,8 +11,8 @@ import (
 	"github.com/go-angle/angle/secure"
 )
 
-// cookieState state saved in cookie and encoded by JWT
-type cookieState struct {
+// cookieStateKeeper state saved in cookie and encoded by JWT
+type cookieStateKeeper struct {
 	jwt secure.Signer
 	app *gh.App
 
@@ -21,13 +21,13 @@ type cookieState struct {
 	cookieMaxAge int
 }
 
-func newCookieState(t secure.Signer, app *gh.App, c *config.Config) StateKeeper {
+func newCookieStateKeeper(t secure.Signer, app *gh.App, c *config.Config) StateKeeper {
 	cookieMaxAge := c.HTTP.CookieMaxAge
 	if cookieMaxAge <= 0 {
 		cookieMaxAge = 7200
 	}
 
-	return &cookieState{
+	return &cookieStateKeeper{
 		jwt:          t,
 		app:          app,
 		claims:       make(secure.SignClaims),
@@ -36,12 +36,12 @@ func newCookieState(t secure.Signer, app *gh.App, c *config.Config) StateKeeper 
 }
 
 // String fmt.Stringer
-func (cookieState) String() string {
-	return "cookieState"
+func (cookieStateKeeper) String() string {
+	return "cookieStateKeeper"
 }
 
 // Set set state item
-func (state *cookieState) Set(c *gin.Context, key string, value interface{}) {
+func (state *cookieStateKeeper) Set(c *gin.Context, key string, value interface{}) {
 	state.claims[key] = value
 
 	// write to context duplicated
@@ -51,13 +51,13 @@ func (state *cookieState) Set(c *gin.Context, key string, value interface{}) {
 }
 
 // Get get state item
-func (state *cookieState) Get(key string) (interface{}, bool) {
+func (state *cookieStateKeeper) Get(key string) (interface{}, bool) {
 	v, ok := state.claims[key]
 	return v, ok
 }
 
 // GetInt get state item and convert it to int
-func (state *cookieState) GetInt(key string) (int, bool) {
+func (state *cookieStateKeeper) GetInt(key string) (int, bool) {
 	if v, ok := state.Get(key); ok {
 		v, ok := v.(int)
 		return v, ok
@@ -66,7 +66,7 @@ func (state *cookieState) GetInt(key string) (int, bool) {
 }
 
 // GetString get state item and convert it to string
-func (state *cookieState) GetString(key string) (string, bool) {
+func (state *cookieStateKeeper) GetString(key string) (string, bool) {
 	if v, ok := state.Get(key); ok {
 		v, ok := v.(string)
 		return v, ok
@@ -75,7 +75,7 @@ func (state *cookieState) GetString(key string) (string, bool) {
 }
 
 // GetFloat64 get float64 state item and convert it to float64
-func (state *cookieState) GetFloat64(key string) (float64, bool) {
+func (state *cookieStateKeeper) GetFloat64(key string) (float64, bool) {
 	if v, ok := state.Get(key); ok {
 		v, ok := v.(float64)
 		return v, ok
@@ -84,7 +84,7 @@ func (state *cookieState) GetFloat64(key string) (float64, bool) {
 }
 
 // Restore restore state from gin.Context
-func (state *cookieState) Restore(c *gin.Context) error {
+func (state *cookieStateKeeper) Restore(c *gin.Context) error {
 	cookie, err := c.Cookie(state.CookieName())
 	if err != nil {
 		return err
@@ -107,7 +107,7 @@ func (state *cookieState) Restore(c *gin.Context) error {
 }
 
 // Save save state
-func (state *cookieState) Save(c *gin.Context) error {
+func (state *cookieStateKeeper) Save(c *gin.Context) error {
 	value, err := state.EncodeCookieValue()
 	if err != nil {
 		return err
@@ -118,18 +118,18 @@ func (state *cookieState) Save(c *gin.Context) error {
 }
 
 // EncodeCookieValue returns cookie value singed with JWT
-func (state *cookieState) EncodeCookieValue() (string, error) {
+func (state *cookieStateKeeper) EncodeCookieValue() (string, error) {
 	return state.jwt.Sign(state.claims)
 }
 
 // Clear clear state
-func (state *cookieState) Clear(c *gin.Context) error {
+func (state *cookieStateKeeper) Clear(c *gin.Context) error {
 	c.SetCookie(state.CookieName(), "", -1, "/", state.cookieDomain(c), false, true)
 	return nil
 }
 
 // cookieDomain returns cookieDomain
-func (state *cookieState) cookieDomain(c *gin.Context) string {
+func (state *cookieStateKeeper) cookieDomain(c *gin.Context) string {
 	if c.Request.Referer() != "" {
 		r := c.Request.Referer()
 		parsed, err := url.Parse(r)
@@ -147,6 +147,6 @@ func (state *cookieState) cookieDomain(c *gin.Context) string {
 }
 
 // CookieName returns name of cookie
-func (state *cookieState) CookieName() string {
+func (state *cookieStateKeeper) CookieName() string {
 	return fmt.Sprintf("__angle_%s__", state.app.Name())
 }

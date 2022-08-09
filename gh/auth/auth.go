@@ -69,9 +69,9 @@ type Option struct {
 	LogoutEndpoint string
 }
 
-// EnableCookieState enable jwt cookie to keep state
-func EnableCookieState() {
-	ProvideState(newCookieState)
+// EnableCookieStateKeeper enable jwt cookie to keep state
+func EnableCookieStateKeeper() {
+	ProvideStateKeeper(newCookieStateKeeper)
 }
 
 // ProvideAuthenticator provide auther
@@ -94,8 +94,8 @@ func ProvideAuthenticator(name string, f interface{}) {
 	})
 }
 
-// ProvideState provide customer StateKeeper implementation
-func ProvideState(newFn interface{}) {
+// ProvideStateKeeper provide customer StateKeeper implementation
+func ProvideStateKeeper(newFn interface{}) {
 	t := reflect.TypeOf(newFn)
 	if t.Kind() != reflect.Func {
 		panic("must use a function to provide Authenticator")
