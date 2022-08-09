@@ -1,0 +1,4 @@
+stage: development
+name: appConfig
+app:
+  my-conf: "be cool"
