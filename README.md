@@ -7,7 +7,7 @@
 ## Highlight Features
 
 - Dependency Injection via [fx](https://pkg.go.dev/go.uber.org/fx).
-- Fast and structure log via [zerolog](https://github.com/rs/zerolog#benchmarks).
+- Fast structure log via [zerolog](https://github.com/rs/zerolog#benchmarks).
 - And more...
 
 ## Get Started
