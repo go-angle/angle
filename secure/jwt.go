@@ -3,9 +3,9 @@ package secure
 import (
 	"errors"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/go-angle/angle/config"
 	"github.com/go-angle/angle/di"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 // jwtSign Json Web Token
