@@ -38,7 +38,7 @@ type Config struct {
 type HTTPConfig struct {
 	Listen              string `yaml:"listen"`
 	ReadHeaderTimeoutMS uint32 `yaml:"read-header-timeout-ms"`
-	ReadTimeoutMS       uint32 `yaml:"read-header-timeout-ms"`
+	ReadTimeoutMS       uint32 `yaml:"read-timeout-ms"`
 	WriteTimeoutMS      uint32 `yaml:"write-timeout-ms"`
 }
 
