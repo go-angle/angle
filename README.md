@@ -4,6 +4,12 @@
 
 [![build](https://github.com/go-angle/angle/actions/workflows/build.yml/badge.svg)](https://github.com/go-angle/angle/actions/workflows/build.yml)
 
+## Highlight Features
+
+- Dependency Injection via [fx](https://pkg.go.dev/go.uber.org/fx).
+- Fast and structure log via [zerolog](https://github.com/rs/zerolog#benchmarks).
+- And more...
+
 ## Get Started
 
 Install angle:
