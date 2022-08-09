@@ -2,6 +2,7 @@
 
 > angle is a Go framework with battery included.
 
+[![build](https://github.com/go-angle/angle/actions/workflows/build.yml/badge.svg)](https://github.com/go-angle/angle/actions/workflows/build.yml)
 
 ## Get Started
 
