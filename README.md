@@ -50,3 +50,6 @@ Now we can run it:
 ``` shell
 go run main.go
 ```
+
+
+More details please see [examples](examples).
