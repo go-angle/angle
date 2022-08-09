@@ -25,9 +25,10 @@ const (
 
 // Config configuration.
 type Config struct {
-	Name    string `yaml:"name"`
-	Version string `yaml:"version"`
-	Stage   string `yaml:"stage"`
+	Name      string `yaml:"name"`
+	Version   string `yaml:"version"`
+	Stage     string `yaml:"stage"`
+	SecretKey string `yaml:"secret-key"`
 
 	HTTP HTTPConfig `yaml:"http"`
 
@@ -40,6 +41,8 @@ type HTTPConfig struct {
 	ReadHeaderTimeoutMS uint32 `yaml:"read-header-timeout-ms"`
 	ReadTimeoutMS       uint32 `yaml:"read-timeout-ms"`
 	WriteTimeoutMS      uint32 `yaml:"write-timeout-ms"`
+
+	CookieMaxAge int `yaml:"cookie-max-age"`
 }
 
 func (hc *HTTPConfig) Timeouts() (time.Duration, time.Duration, time.Duration) {
