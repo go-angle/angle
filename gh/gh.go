@@ -1,4 +1,5 @@
-package gttp
+// Package gh is an abbreviation of gin http.
+package gh
 
 import (
 	"context"

@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-angle/angle"
 	"github.com/go-angle/angle/di"
-	"github.com/go-angle/angle/gttp"
+	"github.com/go-angle/angle/gh"
 	"github.com/go-angle/angle/log"
 	"go.uber.org/fx"
 )
@@ -31,7 +31,7 @@ type routerParams struct {
 }
 
 func init() {
-	gttp.ProvideRouterGroup("api", func(app *gttp.App) *gin.RouterGroup {
+	gh.ProvideRouterGroup("api", func(app *gh.App) *gin.RouterGroup {
 		return app.Engine.Group("api")
 	})
 

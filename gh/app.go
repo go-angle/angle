@@ -1,4 +1,4 @@
-package gttp
+package gh
 
 import (
 	"github.com/gin-gonic/gin"
