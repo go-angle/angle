@@ -94,7 +94,7 @@ func ProvideAuthenticator(name string, f interface{}) {
 	})
 }
 
-// ProvideStateKeeper provide customer StateKeeper implementation
+// ProvideStateKeeper provide custom StateKeeper implementation
 func ProvideStateKeeper(newFn interface{}) {
 	t := reflect.TypeOf(newFn)
 	if t.Kind() != reflect.Func {
