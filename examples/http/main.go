@@ -9,12 +9,6 @@ import (
 	"go.uber.org/fx"
 )
 
-type appConfig struct {
-	MyConf string `yaml:"my-conf"`
-}
-
-var app = &appConfig{}
-
 func main() {
 	ch, _, err := angle.Start("config.yml")
 	if err != nil {
