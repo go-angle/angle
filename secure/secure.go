@@ -5,7 +5,7 @@ type SignClaims map[string]interface{}
 
 // Signer sign data to make sure data is valid and not changed illegally
 type Signer interface {
-	// Sign to sign on data and returns the signed data as a string
+	// Sign data and returns the signed data as a string
 	Sign(claims SignClaims) (string, error)
 
 	// Validate the sign data and decode data to out interface
