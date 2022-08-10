@@ -2,7 +2,9 @@
 
 > angle is a Go framework with battery included.
 
-[![build](https://github.com/go-angle/angle/actions/workflows/build.yml/badge.svg)](https://github.com/go-angle/angle/actions/workflows/build.yml) [![Go Reference](https://pkg.go.dev/badge/github.com/go-angle/angle.svg)](https://pkg.go.dev/github.com/go-angle/angle)
+[![build](https://github.com/go-angle/angle/actions/workflows/build.yml/badge.svg)](https://github.com/go-angle/angle/actions/workflows/build.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/go-angle/angle.svg)](https://pkg.go.dev/github.com/go-angle/angle)
+![GitHub](https://img.shields.io/github/license/go-angle/angle)
 
 ## Highlight Features
 
