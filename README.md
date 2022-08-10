@@ -10,7 +10,7 @@
 - Fast structure log via [zerolog](https://github.com/rs/zerolog#benchmarks).
 - And more...
 
-## Get Started
+## Getting Started
 
 Install angle:
 
