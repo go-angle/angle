@@ -7,6 +7,6 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.4.3
 	github.com/rs/zerolog v1.28.0
 	github.com/stretchr/testify v1.8.1
-	go.uber.org/fx v1.18.1
+	go.uber.org/fx v1.19.0
 	gopkg.in/yaml.v3 v3.0.1
 )
