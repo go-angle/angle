@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-angle/angle"
 	"github.com/go-angle/angle/di"
@@ -33,5 +35,26 @@ func init() {
 		r.Default.GET("/", func(c *gin.Context) {
 			c.Writer.WriteString("Hello, world!")
 		})
+		r.Default.POST("/users", gh.MustBind(createUser).HandlerFunc())
 	})
+}
+
+type UserReq struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
+
+type UserResponse struct {
+	Ok bool `json:"ok"`
+	ID int  `json:"id"`
+}
+
+func createUser(req *UserReq) (*UserResponse, error) {
+	if req.Age <= 0 {
+		return nil, errors.New("no, it's impossiable")
+	}
+	return &UserResponse{
+		Ok: true,
+		ID: 1,
+	}, nil
 }
