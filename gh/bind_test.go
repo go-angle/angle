@@ -34,9 +34,18 @@ func uriControlErr(u *uriErr) (*jsonBody, error) {
 	return &jsonBody{Name: "haha"}, nil
 }
 
+type service struct {
+}
+
+func (s *service) json(jq *jsonBody) *jsonBody {
+	return jq
+}
+
 func setupRouter() *gin.Engine {
+	s := &service{}
 	r := gin.Default()
 	r.POST("/json", MustBind(bindJSONBody).HandlerFunc())
+	r.POST("/service/json", MustBind(s.json).HandlerFunc())
 	r.GET("/err", MustBind(gotErr).HandlerFunc())
 	r.GET("/err/:set", MustBind(uriControlErr).HandlerFunc())
 	return r
@@ -84,4 +93,16 @@ func TestURI(t *testing.T) {
 
 	assert.Equal(t, 500, w.Code)
 	assert.Equal(t, "setted", w.Body.String())
+}
+
+func TestServiceStruct(t *testing.T) {
+	router := setupRouter()
+	w := httptest.NewRecorder()
+
+	req, err := http.NewRequest("POST", "/service/json", bytes.NewBufferString(`{"name": "h"}`))
+	req.Header.Set("Content-Type", "application/json")
+	assert.NoError(t, err)
+	router.ServeHTTP(w, req)
+	assert.Equal(t, 200, w.Code)
+	assert.Equal(t, `{"name":"h"}`, w.Body.String())
 }
