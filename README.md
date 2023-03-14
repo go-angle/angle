@@ -107,7 +107,7 @@ type UserResponse struct {
 
 func createUser(req *UserReq) (*UserResponse, error) {
 	if req.Age <= 0 {
-		return nil, errors.New("no, it's impossiable")
+		return nil, errors.New("no, it's impossible")
 	}
 	return &UserResponse{
 		Ok: true,
